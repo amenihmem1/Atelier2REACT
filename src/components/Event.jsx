@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
+import { Link } from "react-router-dom"; 
 import soldOutImage from "../assets/soldout.png"; 
 
 const Event = ({ name, image, price, numberOfTickets, numberOfParticipants, onBuy }) => {
@@ -16,7 +17,6 @@ const Event = ({ name, image, price, numberOfTickets, numberOfParticipants, onBu
       onBuy();
       setBookingMessage("You have booked an event!");
       setTimeout(() => setBookingMessage(""), 2500);
-
     }
   };
 
@@ -30,7 +30,12 @@ const Event = ({ name, image, price, numberOfTickets, numberOfParticipants, onBu
           style={{ height: "200px", objectFit: "cover" }}
         />
         <Card.Body>
-          <Card.Title>{name}</Card.Title>
+          <Card.Title>
+            <Link to={`/eventDetails/${name}`} style={{ textDecoration: "underline", color: "black" }}>
+              {name}
+            </Link>
+          </Card.Title>
+
           <p>Price: {price} </p>
           <p>Number of tickets:  {numberOfTickets}</p>
           <p>Number of participants: {numberOfParticipants}</p>

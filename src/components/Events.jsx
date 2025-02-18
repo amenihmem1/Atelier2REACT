@@ -32,49 +32,46 @@ const Events = () => {
     },
   ]);
 
-const handleBuy = (index) => {
-  setEventData((prevData) => {
-    const updatedEvents = [...prevData];
-    const event = { ...updatedEvents[index] }; 
+  const handleBuy = (index) => {
+    setEventData((prevData) => {
+      const updatedEvents = [...prevData];
+      const event = { ...updatedEvents[index] };
 
-    console.log("Before update:", event.numberOfTickets, event.numberOfParticipants);
+      console.log("Before update:", event.numberOfTickets, event.numberOfParticipants);
 
-    if (event.numberOfTickets > 0) {
-      event.numberOfTickets -= 1;  
-      event.numberOfParticipants += 1; 
-    }
-    updatedEvents[index] = event;  
-    console.log("After update:", event.numberOfTickets, event.numberOfParticipants);
+      if (event.numberOfTickets > 0) {
+        event.numberOfTickets -= 1;
+        event.numberOfParticipants += 1;
+      }
+      updatedEvents[index] = event;
+      console.log("After update:", event.numberOfTickets, event.numberOfParticipants);
 
-    return updatedEvents;
-  });
-};
-
-
+      return updatedEvents;
+    });
+  };
 
   useEffect(() => {
     setShowWelcomeMessage(true);
-  }, []); 
+  }, []);
 
   return (
-    <Container>
-      {showWelcomeMessage && (
-        <Alert variant="success" onClose={() => setShowWelcomeMessage(false)} dismissible>
-          Hey welcome to Esprim Events 
-        </Alert>
-      )}
+    <div>
+      <Container>
+        {showWelcomeMessage && (
+          <Alert variant="success" onClose={() => setShowWelcomeMessage(false)} dismissible>
+            Hey welcome to Esprim Events
+          </Alert>
+        )}
 
-      <Row>
-        {eventData.map((event, index) => (
-          <Col key={index} md={4}>
-            <Event 
-              {...event} 
-              onBuy={() => handleBuy(index)} 
-            />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+        <Row>
+          {eventData.map((event, index) => (
+            <Col key={index} md={4}>
+              <Event {...event} onBuy={() => handleBuy(index)} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
   );
 };
 
